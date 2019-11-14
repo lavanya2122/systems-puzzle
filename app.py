@@ -24,10 +24,19 @@ def success():
     results = []
  
     qry = db_session.query(Items)
-    results = qry.all()
-
+    for data in qry.all():
+      ele = {
+              "Item ID: " : str(data.id),
+              "Item Name: " : str(data.name),
+              "Item Quantity: " : str(data.quantity),
+              "Item Description: ": str(data.description),
+              "Item Date Added: ": str(data.date_added)
+      }
+      results.append(ele)
     return str(results)
   
 
 if __name__ == '__main__':
+    #if we want to expose 5001 port for flask app, then use below line
+    #app.run(host='0.0.0.0', port=5001)
     app.run(host='0.0.0.0')
